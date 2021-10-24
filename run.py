@@ -26,3 +26,8 @@ def check_existing_credentials(email):
     Function that check if a credential exists with that email and return a Boolean
     '''
     return Credential.credential_exist(email)
+def display_credentials():
+    '''
+    Function that returns all the saved credentials
+    '''
+    return Credential.display_credentials()
