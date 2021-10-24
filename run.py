@@ -21,3 +21,8 @@ def find_credential(email):
     Function that finds a credential by email and returns the credential
     '''
     return Credential.find_by_email(email)
+def check_existing_credentials(email):
+    '''
+    Function that check if a credential exists with that email and return a Boolean
+    '''
+    return Credential.credential_exist(email)
