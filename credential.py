@@ -28,3 +28,17 @@ class Credential:
         '''
 
         Credential.credential_list.remove(self)
+    @classmethod
+    def find_by_email(cls,email):
+        '''
+        Method that takes in an email and returns a credential that matches that email.
+
+        Args:
+            email: email to search for
+        Returns :
+            Credential of person that matches the email.
+        '''
+
+        for credential in cls.credential_list:
+            if credential.email == email:
+                return credential
