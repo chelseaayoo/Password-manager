@@ -2,6 +2,7 @@ class Credential:
     """
     Class that generates new instances of credentials.
     """
+    pass
 
     credential_list = [] # Empty credential list
 
@@ -11,3 +12,12 @@ class Credential:
 
         self.email = email
         self.password = password
+    credential_list = [] # Empty credential list
+ # Init method up here
+    def save_credential(self):
+
+        '''
+        save_credential method saves credential objects into credential_list
+        '''
+
+        Credential.credential_list.append(self)
