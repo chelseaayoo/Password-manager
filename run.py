@@ -1,11 +1,12 @@
 #!/usr/bin/env python3.8
+#!/usr/bin/env python3.6
 from credential import Credential
 from user import User
-def create_credential(email,password):
+def create_credential(login_username,password):
     '''
     Function to create a new credential
     '''
-    new_credential = Credential(email,password)
+    new_credential = Credential(login_username,password)
     return new_credential
 def save_credentials(credential):
     '''
@@ -17,26 +18,26 @@ def del_credential(credential):
     Function to delete a credential
     '''
     credential.delete_credential()
-def find_credential(email):
+def find_credential(login_username):
     '''
     Function that finds a credential by email and returns the credential
     '''
-    return Credential.find_by_email(email)
-def check_existing_credentials(email):
+    return Credential.find_by_login_username(login_username)
+def check_existing_credentials(login_username):
     '''
-    Function that check if a credential exists with that email and return a Boolean
+    Function that check if a credential exists with that login_username and return a Boolean
     '''
-    return Credential.credential_exist(email)
+    return Credential.credential_exist(login_username)
 def display_credentials():
     '''
     Function that returns all the saved credentials
     '''
     return Credential.display_credentials()
-def create_user(login_username,first_name,last_name):
+def create_user(email,first_name,last_name):
     '''
     Function to create a new user
     '''
-    new_user = User(login_username,first_name,last_name)
+    new_user = User(email,first_name,last_name)
     return new_user
 def save_users(user):
     '''
@@ -48,16 +49,16 @@ def del_user(user):
     Function to delete a user
     '''
     user.delete_user()
-def find_user(username):
+def find_user(email):
     '''
-    Function that finds a user by username and returns the user
+    Function that finds a user by email and returns the user
     '''
-    return User.find_by_username(username)
-def check_existing_users(username):
+    return User.find_by_email(email)
+def check_existing_users(email):
     '''
-    Function that check if a user exists with username and return a Boolean
+    Function that check if a user exists with email and return a Boolean
     '''
-    return User.user_exist(username)
+    return User.user_exist(email)
 def display_users():
     '''
     Function that returns all the saved users
@@ -65,14 +66,14 @@ def display_users():
     return User.display_users()
 
 def main():
-    print("Hello Welcome to your contact list. What is your name?")
+    print("Hello Welcome to your credential list. What is your name?")
     login_username = input()
 
     print(f"Hello {login_username}. what would you like to do?")
     print('\n')
 
     while True:
-                    print("Use these short codes : cc - create a new credential, dc - display credentials, fc -find a credential,  delc -delete credential, ex -exit the contact list ")
+                    print("Use these short codes : cc - create a new credential, dc - display credentials, fc -find a credential,  delc -delete credential, ex -exit the credential list ")
 
                     short_code = input().lower()
 
@@ -96,9 +97,9 @@ def main():
                             email = input()
 
 
-                            save_credentials(create_credential(email,password)) # create and save new credential.
+                            save_credentials(create_credential(login_username,password)) # create and save new credential.
                             print ('\n')
-                            print(f"New Credential  {password}  with login  email {email} created")
+                            print(f"New Credential with login username:  {login_username}  with password: {password} created")
                             print ('\n')
 
                     elif short_code == 'dc':
@@ -108,7 +109,7 @@ def main():
                                     print('\n')
 
                                     for credential in display_credentials():
-                                            print(f"Email : {credential.email} Password: {credential.password}")
+                                            print(f"Login Username : {credential.login_username} Password: {credential.password}")
 
                                     print('\n')
                             else:
@@ -118,12 +119,12 @@ def main():
 
                     elif short_code == 'fc':
 
-                            print("Enter the email you used while creating your credential")
+                            print("Enter the login username you used while creating your credential")
 
-                            search_email = input()
-                            if check_existing_credentials(search_email):
-                                    search_credential = find_credential(search_email)
-                                    print(f"{search_credential.email} Your password is  {search_credential.password}")
+                            search_login_username = input()
+                            if check_existing_credentials(search_login_username):
+                                    search_credential = find_credential(search_login_username)
+                                    print(f"{search_credential.login_username} Your password is  {search_credential.password}")
                                     print('-' * 20)
 
                                     # print(f"Phone number.......{search_contact.phone_number}")
@@ -131,11 +132,11 @@ def main():
                             else:
                                     print("That credential does not exist")
                     elif short_code == 'delc':
-                        if del_credential():
+                        if del_credential(create_credential):
                             print("choose credentials to delete")
                             print('\n')
                             for credential in del_credential():
-                                print({credential})
+                                print("{credential}")
                         else:
                             print('\n')
                             print("no credential deleted")

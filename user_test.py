@@ -23,7 +23,7 @@ class TestUser(unittest.TestCase):
         test_init test case to test if the object is initialized properly
         '''
 
-        self.assertEqual(self.new_user.login_username,"ani")
+        self.assertEqual(self.new_user.email,"ani")
         self.assertEqual(self.new_user.first_name,"Anipher")
         self.assertEqual(self.new_user.last_name,"Chelsea")
     def test_save_user(self):
@@ -70,16 +70,16 @@ class TestUser(unittest.TestCase):
 
             self.new_user.delete_user()# Deleting a user object
             self.assertEqual(len(User.user_list),1)
-    def test_find_user_by_username(self):
+    def test_find_user_by_email(self):
         '''
-        test to check if we can find a user by username and display information
+        test to check if we can find a user by email and display information
         '''
 
         self.new_user.save_user()
         test_user = User("barry","Valentine","Achieng") # new user
         test_user.save_user()
 
-        found_user = User.find_by_username("barry")
+        found_user = User.find_by_email("barry")
 
         self.assertEqual(found_user.first_name,test_user.first_name)
     def test_user_exists(self):
